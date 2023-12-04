@@ -62,6 +62,9 @@ body {
   text-align: center;
 }
 
+/* #draft h2 {
+  color: white;
+} */
 #draft figure {
   margin: 0;
   padding: 0;

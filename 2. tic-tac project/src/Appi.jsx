@@ -1,32 +1,53 @@
-import { useState } from "react";
-// import Review from "./components/Review";
-function Appi() {
-  const [showFeedback, setShowFeedback] = useState(false);
-  function handleChange() {
-    console.log("genta");
-  }
+import React from "react";
 
-  function addFeedback() {
-    setShowFeedback(true);
-  }
+function Appi() {
+  const [textArea, setTextArea] = React.useState("Awesome course!!!");
+  const [input, setInput] = React.useState("Maximilian");
+
+  const handleSave = () => {
+    console.log("Feedback saved:", textArea, "Name:", input);
+  };
+
   return (
-    <main>
-      {" "}
+    <>
       <section id="feedback">
-        <h2>Please share some feedback</h2> <label>YOUR FEEDBACK</label>
-        <input type="text" placeholder="Awesome course!!!"></input>
-        <label>YOUR NAME</label>
-        <input type="text" placeholder="Maximilian"></input>
+        <h2>Please share some feedback</h2>
+        <p>
+          <label htmlFor="feedbackInput">Your Feedback</label>
+          <textarea
+            id="feedbackInput"
+            value={textArea}
+            onChange={(e) => setTextArea(e.target.value)}
+          />
+        </p>
+        <p>
+          <label htmlFor="nameInput">Your Name</label>
+          <input
+            type="text"
+            id="nameInput"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+        </p>
       </section>
-      <h2>Your feedback</h2>
-      {showFeedback && (
-        <section id="draft">
-          <input type="text" placeholder="Maximilian"></input>
-          <p>Maximilian</p>
-          <button onClick={addFeedback}>Save</button>
-        </section>
-      )}
-    </main>
+      <section id="draft">
+        <h2>Your feedback</h2>
+
+        <Review feedback={textArea} student={input} />
+
+        <p>
+          <button onClick={handleSave}>Save</button>
+        </p>
+      </section>
+    </>
   );
 }
+
+const Review = ({ feedback, student }) => (
+  <div>
+    <p>Feedback: {feedback}</p>
+    <p>Student: {student}</p>
+  </div>
+);
+
 export default Appi;
